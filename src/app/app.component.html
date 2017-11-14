@@ -1,0 +1,17 @@
+<h1>Add Quote</h1>
+<form (submit)="addQuote()" #form ="ngForm">
+  Quote:<textarea name="quote" required [(ngModel)]="quote.quote" #quote = "ngModel"></textarea><br>
+  <div class="errors" *ngIf="!quote.valid">Quote is required</div>
+  Author: <input type="text" required name="author" [(ngModel)]="quote.author" #author = "ngModel"><br>
+  <div class="errors" *ngIf="!quote.valid">Author is required</div>
+  <input [disabled]="!form.form.valid" type="submit" value="submit">
+</form>
+
+<h1>Quotes: </h1>
+
+<div *ngFor="let quote of quotes, let idx = index">
+  <span>Quote: {{quote.quote}}</span>
+  <span>Author: {{quote.author}}</span>
+  <span>Votes:{{quote.votes}}</span>
+  <span><button (click)="upVote(idx)">Upvote</button><button (click)="downVote(idx)">Downvote</button><button (click)="removeQuote(idx)">Delete</button></span>
+</div>
